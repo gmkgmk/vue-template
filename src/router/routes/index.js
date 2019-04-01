@@ -3,5 +3,12 @@ import order from './order';
 export default {
   path: '/layout',
   component: Layout,
-  children: [{ path: '', name: 'home', component: Home }, ...order]
+  children: [
+    {
+      path: '',
+      name: 'home',
+      component: Home
+    },
+    ...order,
+  ]
 };

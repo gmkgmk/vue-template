@@ -14,7 +14,8 @@ const {
   transformModel,
   transformRouter,
   transformComponentIndex,
-  transformModelIndex
+  transformModelIndex,
+  transformRouteIndex
 } = require('./transform');
 
 let resolveFilePath = {};
@@ -75,6 +76,8 @@ const bootStrap = async () => {
   await Promise.all(promises);
   reWritePage(resolveFilePath.page);
   reWriteModel(resolveFilePath.model);
+  // 先检查route-indexedDB,再重写router
+  reWriteRouteIndex(globalFile.routerPath);
   reWriteRouter(globalFile.routerPath);
   reWriteComponentIndex(globalFile.componentPath);
 };
@@ -84,8 +87,7 @@ function reWritePage(filePath) {
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) log(err);
     const vuexPath = `${globalFile.moduleName}/${globalFile.pageName}`;
-    const result = data.replace(/{\$vuexName}/g, `${vuexPath}`);
-
+    const result = data.replace(/\$vuexName/g, `${vuexPath}`);
 
     fs.writeFileSync(filePath, result, 'utf8');
   });
@@ -107,7 +109,7 @@ async function reWriteModel(filePath) {
         .replace(/{\$moduleName}/g, `${moduleName}`)
         .replace('{$modulePath}', `${modulePath}`);
       fs.writeFileSync(vuexIndexPath, result, 'utf8');
-      const modelIndex = path.join(pathPrefix,  'model','index.js');
+      const modelIndex = path.join(pathPrefix, 'model', 'index.js');
 
       transformModelIndex(
         modelIndex,
@@ -136,7 +138,7 @@ async function reWriteRouter(filePath) {
   );
 }
 
-// 重新componentIndex信息
+// 重写componentIndex信息
 async function reWriteComponentIndex(filePath) {
   const componentIndex = path.join(filePath, 'pages', 'index.js');
   const componentPath = `@pages/${globalFile.moduleName}/${
@@ -145,4 +147,19 @@ async function reWriteComponentIndex(filePath) {
   transformComponentIndex(componentIndex, routerComponentName(), componentPath);
 }
 
+// 重写componentIndex信息
+async function reWriteRouteIndex(filePath) {
+  const componentIndex = path.join(filePath, 'index.js');
+  const componentPath = `./${globalFile.moduleName}.js`;
+  transformRouteIndex(componentIndex, globalFile.moduleName, componentPath);
+
+  const routePath = path.join(filePath, `${globalFile.moduleName}.js`);
+  await fs.writeFileSync(
+    routePath,
+    ` import {} from '@pages';
+      export default [];
+    `,
+    'utf8'
+  );
+}
 bootStrap();

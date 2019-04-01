@@ -4,10 +4,13 @@ const traverse = require('@babel/traverse');
 const t = require('@babel/types');
 const fs = require('fs');
 const codeEncoding = 'utf8';
+
 const componentIndexAst = require('./ast/componentIndex');
 const modelIndexAst = require('./ast/modelIndex');
+const routerIndexAst = require('./ast/routerIndex');
 const modelAst = require('./ast/model');
 const routerAst = require('./ast/router');
+
 const methods = [
   'ExportDefaultDeclaration',
   'ExportNamedDeclaration',
@@ -66,3 +69,4 @@ exports.transformModel = transform(modelAst);
 exports.transformRouter = transform(routerAst);
 exports.transformComponentIndex = transform(componentIndexAst);
 exports.transformModelIndex = transform(modelIndexAst);
+exports.transformRouteIndex = transform(routerIndexAst);
