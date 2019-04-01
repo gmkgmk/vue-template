@@ -1,6 +1,7 @@
 <template>
   <div>
     假装这是登录
+    <router-link to="layout/order/list">去订单</router-link>
   </div>
 </template>
 <script>

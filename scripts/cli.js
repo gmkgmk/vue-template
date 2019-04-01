@@ -13,7 +13,8 @@ const { FilesGenerator, resolvePath } = require('./until');
 const {
   transformModel,
   transformRouter,
-  transformComponentIndex
+  transformComponentIndex,
+  transformModelIndex
 } = require('./transform');
 
 let resolveFilePath = {};
@@ -83,7 +84,9 @@ function reWritePage(filePath) {
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) log(err);
     const vuexPath = `${globalFile.moduleName}/${globalFile.pageName}`;
-    const result = data.replace('$vuexName', `'${vuexPath}'`);
+    const result = data.replace(/{\$vuexName}/g, `${vuexPath}`);
+
+
     fs.writeFileSync(filePath, result, 'utf8');
   });
 }
@@ -104,6 +107,13 @@ async function reWriteModel(filePath) {
         .replace(/{\$moduleName}/g, `${moduleName}`)
         .replace('{$modulePath}', `${modulePath}`);
       fs.writeFileSync(vuexIndexPath, result, 'utf8');
+      const modelIndex = path.join(pathPrefix,  'model','index.js');
+
+      transformModelIndex(
+        modelIndex,
+        globalFile.moduleName,
+        `./${globalFile.moduleName}`
+      );
     });
   } else {
     // 否则计算ast树加入

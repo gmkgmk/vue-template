@@ -1,4 +1,4 @@
-import { orderList, orderCreate, orderA } from '@pages';
+import { orderList, orderCreate } from '@pages';
 export default [{
   path: 'order/list',
   name: 'order/list',
@@ -7,8 +7,4 @@ export default [{
   path: "order/create",
   name: "order/create",
   component: orderCreate
-}, {
-  path: "order/a",
-  name: "order/a",
-  component: orderA
 }];

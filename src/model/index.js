@@ -1,4 +1,4 @@
 import order from './order';
-
-export default { order };
-
+export default {
+  order
+};

@@ -33,6 +33,7 @@
           </el-form>
         </div>
         <div class="content-wrapper">
+            <span>$vuexName</span>
           <el-table :data="tableData" stripe border>
             <el-table-column label="姓名" prop="name"></el-table-column>
             <el-table-column label="ID" prop="id"></el-table-column>
