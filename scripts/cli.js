@@ -10,13 +10,16 @@ const {
   routerPath
 } = require('./config');
 const { FilesGenerator, resolvePath } = require('./until');
-const {
-  transformModel,
-  transformRouter,
-  transformComponentIndex,
-  transformModelIndex,
-  transformRouteIndex
-} = require('./transform');
+// const {
+//   transformModel,
+//   transformRouter,
+//   transformComponentIndex,
+//   transformModelIndex,
+//   transformRouteIndex
+// } = require('./transform/transformToAst');
+
+const transformModel = require('./transform/model');
+const transformRouter = require('./transform/router');
 
 let resolveFilePath = {};
 let globalFile = {};
@@ -75,11 +78,24 @@ const bootStrap = async () => {
 
   await Promise.all(promises);
   reWritePage(resolveFilePath.page);
-  reWriteModel(resolveFilePath.model);
+  new transformModel(
+    resolveFilePath.model,
+    globalFile.pageName,
+    globalFile.moduleName,
+    template['moduleIndex']
+  );
+  new transformRouter(
+    globalFile.routerPath,
+    globalFile.pageName,
+    globalFile.moduleName,
+    globalFile.componentPath,
+    template['routerIndex']
+  );
+  // reWriteModel(resolveFilePath.model);
   // 先检查route-indexedDB,再重写router
-  reWriteRouteIndex(globalFile.routerPath);
-  reWriteRouter(globalFile.routerPath);
-  reWriteComponentIndex(globalFile.componentPath);
+  // reWriteRouteIndex(globalFile.routerPath);
+  // reWriteRouter(globalFile.routerPath);
+  // reWriteComponentIndex(globalFile.componentPath);
 };
 
 // 重写page
@@ -93,73 +109,73 @@ function reWritePage(filePath) {
   });
 }
 
-// 重写model
-async function reWriteModel(filePath) {
-  const vuexIndexPath = path.join(filePath, '..', 'index.js');
-  const vuexPath = `./${globalFile.pageName}`;
+// // 重写model
+// async function reWriteModel(filePath) {
+//   const vuexIndexPath = path.join(filePath, '..', 'index.js');
+//   const vuexPath = `./${globalFile.pageName}`;
 
-  if (!fs.existsSync(vuexIndexPath)) {
-    // 没有文件则生成
-    await FilesGenerator(vuexIndexPath, template['moduleIndex']);
-    fs.readFile(vuexIndexPath, 'utf8', (err, data) => {
-      if (err) log(err);
-      const moduleName = globalFile.pageName;
-      const modulePath = vuexPath;
-      let result = data
-        .replace(/{\$moduleName}/g, `${moduleName}`)
-        .replace('{$modulePath}', `${modulePath}`);
-      fs.writeFileSync(vuexIndexPath, result, 'utf8');
-      const modelIndex = path.join(pathPrefix, 'model', 'index.js');
+//   if (!fs.existsSync(vuexIndexPath)) {
+//     // 没有文件则生成
+//     await FilesGenerator(vuexIndexPath, template['moduleIndex']);
+//     fs.readFile(vuexIndexPath, 'utf8', (err, data) => {
+//       if (err) log(err);
+//       const moduleName = globalFile.pageName;
+//       const modulePath = vuexPath;
+//       let result = data
+//         .replace(/{\$moduleName}/g, `${moduleName}`)
+//         .replace('{$modulePath}', `${modulePath}`);
+//       fs.writeFileSync(vuexIndexPath, result, 'utf8');
+//       const modelIndex = path.join(pathPrefix, 'model', 'index.js');
 
-      transformModelIndex(
-        modelIndex,
-        globalFile.moduleName,
-        `./${globalFile.moduleName}`
-      );
-    });
-  } else {
-    // 否则计算ast树加入
-    transformModel(vuexIndexPath, globalFile.pageName, vuexPath);
-  }
-}
+//       transformModelIndex(
+//         modelIndex,
+//         globalFile.moduleName,
+//         `./${globalFile.moduleName}`
+//       );
+//     });
+//   } else {
+//     // 否则计算ast树加入
+//     transformModel(vuexIndexPath, globalFile.pageName, vuexPath);
+//   }
+// }
 
 const routerComponentName = () =>
   globalFile.moduleName +
   globalFile.pageName.charAt(0).toUpperCase() +
   globalFile.pageName.slice(1);
 
-// 重写路由信息
-async function reWriteRouter(filePath) {
-  const modulePath = path.join(filePath, `${globalFile.moduleName}.js`);
-  transformRouter(
-    modulePath,
-    routerComponentName(),
-    `${globalFile.moduleName}/${globalFile.pageName}`
-  );
-}
+// // 重写路由信息
+// async function reWriteRouter(filePath) {
+//   const modulePath = path.join(filePath, `${globalFile.moduleName}.js`);
+//   transformRouter(
+//     modulePath,
+//     routerComponentName(),
+//     `${globalFile.moduleName}/${globalFile.pageName}`
+//   );
+// }
 
 // 重写componentIndex信息
-async function reWriteComponentIndex(filePath) {
-  const componentIndex = path.join(filePath, 'pages', 'index.js');
-  const componentPath = `@pages/${globalFile.moduleName}/${
-    globalFile.pageName
-  }.vue`;
-  transformComponentIndex(componentIndex, routerComponentName(), componentPath);
-}
+// async function reWriteComponentIndex(filePath) {
+//   const componentIndex = path.join(filePath, 'pages', 'index.js');
+//   const componentPath = `@pages/${globalFile.moduleName}/${
+//     globalFile.pageName
+//   }.vue`;
+//   transformComponentIndex(componentIndex, routerComponentName(), componentPath);
+// }
 
 // 重写componentIndex信息
-async function reWriteRouteIndex(filePath) {
-  const componentIndex = path.join(filePath, 'index.js');
-  const componentPath = `./${globalFile.moduleName}.js`;
-  transformRouteIndex(componentIndex, globalFile.moduleName, componentPath);
+// async function reWriteRouteIndex(filePath) {
+//   const routeIndex = path.join(filePath, 'index.js');
+//   const componentPath = `./${globalFile.moduleName}.js`;
+//   transformRouteIndex(routeIndex, globalFile.moduleName, componentPath);
 
-  const routePath = path.join(filePath, `${globalFile.moduleName}.js`);
-  await fs.writeFileSync(
-    routePath,
-    ` import {} from '@pages';
-      export default [];
-    `,
-    'utf8'
-  );
-}
+//   const routePath = path.join(filePath, `${globalFile.moduleName}.js`);
+//   await fs.writeFileSync(
+//     routePath,
+//     ` import {} from '@pages';
+//       export default [];
+//     `,
+//     'utf8'
+//   );
+// }
 bootStrap();

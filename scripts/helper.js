@@ -1,22 +1,5 @@
 const chalk = require("chalk");
 
-/**
- *
- *
- * @date 2019-01-29
- * @export
- * @returns String
- */
-function homedir() {
-    var env = process.env;
-    var home = env.HOME;
-
-    if (process.platform === "win32") {
-        return env.USERPROFILE || env.HOMEDRIVE + env.HOMEPATH || home || null;
-    }
-    return home || null;
-}
-
 function currentPath() {
     let currentPath = () => {
         return process.cwd();
@@ -38,7 +21,6 @@ function errorLog() {
 
 module.exports = {
     currentPath,
-    homedir,
     log,
     errorLog
 };

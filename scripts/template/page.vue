@@ -33,7 +33,7 @@
           </el-form>
         </div>
         <div class="content-wrapper">
-            <span>'studnet/list'</span>
+            <span>$vuexName</span>
           <el-table :data="tableData" stripe border>
             <el-table-column label="姓名" prop="name"></el-table-column>
             <el-table-column label="ID" prop="id"></el-table-column>
@@ -53,7 +53,7 @@ function init() {
 }
 
 import { createNamespacedHelpers } from 'vuex'
-const { mapState } = createNamespacedHelpers('studnet/list')
+const { mapState } = createNamespacedHelpers('$vuexName')
 
 export default {
   name: 'example-component',

@@ -2,7 +2,7 @@
  * @Author: guo.mk
  * @Date: 2019-03-26 17:43:47
  * @Last Modified by: guo.mk
- * @Last Modified time: 2019-04-01 14:46:24
+ * @Last Modified time: 2019-04-02 11:11:29
  */
 const t = require('@babel/types');
 const astImplement = require('./astImplement');
@@ -15,6 +15,7 @@ module.exports = class modelAst extends astImplement {
     super(moduleName, modulePath, ast);
   }
   ObjectExpression(path) {
+    console.log("执行")
     const { properties } = path.node;
     properties.forEach(e => {
       const { name } = e.key;

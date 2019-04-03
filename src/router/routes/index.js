@@ -1,14 +1,6 @@
-import { Layout, Home } from '@pages';
-import order from './order';
+import { Layout } from '@pages';
 export default {
   path: '/layout',
   component: Layout,
-  children: [
-    {
-      path: '',
-      name: 'home',
-      component: Home
-    },
-    ...order,
-  ]
+  children: []
 };

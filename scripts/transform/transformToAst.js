@@ -1,15 +1,14 @@
 const generator = require('@babel/generator');
 const parser = require('@babel/parser');
 const traverse = require('@babel/traverse');
-const t = require('@babel/types');
 const fs = require('fs');
 const codeEncoding = 'utf8';
 
-const componentIndexAst = require('./ast/componentIndex');
-const modelIndexAst = require('./ast/modelIndex');
-const routerIndexAst = require('./ast/routerIndex');
-const modelAst = require('./ast/model');
-const routerAst = require('./ast/router');
+const componentIndexAst = require('../ast/componentIndex');
+const modelIndexAst = require('../ast/modelIndex');
+const routerIndexAst = require('../ast/routerIndex');
+const modelAst = require('../ast/model');
+const routerAst = require('../ast/router');
 
 const methods = [
   'ExportDefaultDeclaration',
@@ -18,7 +17,7 @@ const methods = [
   'Program',
   'ImportDeclaration'
 ];
-
+// 生成 visitor
 class Visitor {
   constructor() {
     this.astClass = {};
@@ -40,7 +39,7 @@ class Visitor {
     return visitor;
   }
 }
-
+// 编译
 function compile(code, moduleName, modulePath, createVisitor) {
   const ast = parser.parse(code, { allowImportExportEverywhere: true });
   const visitorControl = new Visitor();
@@ -50,7 +49,7 @@ function compile(code, moduleName, modulePath, createVisitor) {
 
   return generator.default(ast, {}, code);
 }
-
+// 读取文件
 function transform(astVisitor) {
   return function(filePath, moduleName, modulePath) {
     fs.readFile(filePath, codeEncoding, (err, code) => {

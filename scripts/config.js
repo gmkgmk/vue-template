@@ -38,5 +38,6 @@ exports.template = {
   page: './scripts/template/page.vue',
   model: './scripts/template/model.js',
   services: './scripts/template/services.js',
-  moduleIndex: './scripts/template/module.index.js'
+  moduleIndex: './scripts/template/module.index.js',
+  routerIndex: './scripts/template/router.index.js'
 };
