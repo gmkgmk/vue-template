@@ -46,7 +46,6 @@ module.exports = class {
   }
   componentIndex() {
     const pageIndexPath = `@pages/${this.moduleName}/${this.pageName}.vue`;
-    console.log(this.componentIndexPath);
     transformComponentIndex(
       this.componentIndexPath,
       routerComponentName(this.moduleName, this.pageName),

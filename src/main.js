@@ -1,6 +1,6 @@
-import Vue from 'vue';
+import Vue from './node_modules/vue';
 import App from './App.vue';
-import ElementUi from 'element-ui';
+import ElementUi from './node_modules/element-ui';
 import store from './store/store';
 import router from './router';
 Vue.config.productionTip = false;
