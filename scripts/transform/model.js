@@ -7,8 +7,8 @@ const {
 const { FilesGenerator } = require('./../until');
 
 module.exports = class {
-  constructor(filePath, pageName, moduleName, template) {
-    this.modelPath = path.join(filePath, '..', 'index.js');
+  constructor({ model, pageName, moduleName }, template) {
+    this.modelPath = path.join(model, '..', 'index.js');
     this.pageName = pageName;
     this.moduleName = moduleName;
     this.template = template;

@@ -1,6 +1,7 @@
 // 项目目录前缀
 exports.pathPrefix = 'src';
 exports.routerPath = 'src/router/routes';
+exports.pageIndexPath = 'src/pages/index.js';
 
 // 询问信息
 exports.ps = [
@@ -15,24 +16,29 @@ exports.ps = [
     handle: 'pageName'
   }
 ];
+// 确认生成的页面信息
+exports.confirmPs = {
+  type: 'confirm',
+  query: '',
+  handle: 'result',
+  accept: 'Y',
+  deny: 'n'
+};
 // 页面配置信息
-exports.pageConfig = [
-  {
+exports.pageConfig = {
+  page: {
     name: '页面',
-    path: 'pages',
-    key: 'page'
+    path: 'pages'
   },
-  {
+  services: {
     name: '服务层',
-    path: 'services',
-    key: 'services'
+    path: 'services'
   },
-  {
-    name: '模型',
-    path: 'models',
-    key: 'model'
+  model: {
+    name: '模型层',
+    path: 'model'
   }
-];
+};
 // 模板地址
 exports.template = {
   page: './scripts/template/page.vue',

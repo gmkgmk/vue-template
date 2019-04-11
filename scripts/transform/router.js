@@ -11,13 +11,13 @@ const routerComponentName = (moduleName, pageName) =>
   moduleName + pageName.charAt(0).toUpperCase() + pageName.slice(1);
 
 module.exports = class {
-  constructor(filePath, pageName, moduleName, componentPath, template) {
+  constructor({ routerPath, pageName, moduleName, pageIndexPath }, template) {
     this.pageName = pageName;
     this.moduleName = moduleName;
     this.template = template;
-    this.routeIndex = path.join(filePath, 'index.js');
-    this.routePath = path.join(filePath, `${this.moduleName}.js`);
-    this.componentIndexPath = path.join(componentPath, 'pages', `index.js`);
+    this.routeIndex = path.join(routerPath, 'index.js');
+    this.routePath = path.join(routerPath, `${this.moduleName}.js`);
+    this.componentIndexPath = path.join(pageIndexPath);
     this.run();
   }
   run() {
@@ -45,11 +45,12 @@ module.exports = class {
     this.routerIndex();
   }
   componentIndex() {
-    const componentPath = `@pages/${this.moduleName}/${this.pageName}.vue`;
+    const pageIndexPath = `@pages/${this.moduleName}/${this.pageName}.vue`;
+    console.log(this.componentIndexPath);
     transformComponentIndex(
       this.componentIndexPath,
       routerComponentName(this.moduleName, this.pageName),
-      componentPath
+      pageIndexPath
     );
   }
   // 新建模块文件夹
@@ -59,7 +60,7 @@ module.exports = class {
   // 整理router/index.js
   async routerIndex() {
     const routeIndex = path.join(this.routePath, '..', 'index.js');
-    const componentPath = `./${this.moduleName}.js`;
-    transformRouteIndex(routeIndex, this.moduleName, componentPath);
+    const pageIndexPath = `./${this.moduleName}.js`;
+    transformRouteIndex(routeIndex, this.moduleName, pageIndexPath);
   }
 };
