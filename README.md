@@ -19,13 +19,13 @@
 
 ### 项目原有结构
 
-![项目原有结构](https://github.com/gmkgmk/ast-build-template/tree/master/README-image/1.jpg)
+![项目原有结构](https://github.com/gmkgmk/ast-build-template/blob/master/README-image/1.jpg)
 
 ### 输入信息并确认
-![输入信息并确认](https://github.com/gmkgmk/ast-build-template/tree/master/README-image/2.jpg)
+![输入信息并确认](https://github.com/gmkgmk/ast-build-template/blob/master/README-image/2.jpg)
 
 ### 生成文件
-![生成文件](https://github.com/gmkgmk/ast-build-template/tree/master/README-image/3.jpg)
+![生成文件](https://github.com/gmkgmk/ast-build-template/blob/master/README-image/3.jpg)
 
 ### 修改后文件结构
-![修改后文件结构](https://github.com/gmkgmk/ast-build-template/tree/master/README-image/4.jpg)
+![修改后文件结构](https://github.com/gmkgmk/ast-build-template/blob/master/README-image/4.jpg)
