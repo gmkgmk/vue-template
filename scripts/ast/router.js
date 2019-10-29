@@ -3,12 +3,11 @@ const astImplement = require('./astImplement');
 
 // 生成router Ast树
 module.exports = class routerAst extends astImplement {
-    constructor(moduleName, modulePath, ast) {
-        super(moduleName, modulePath, ast);
+    constructor(moduleName, modulePath) {
+        super(moduleName, modulePath);
     }
     ImportDeclaration(path) {
         const { specifiers } = path.node;
-        specifiers.find(el => this.moduleName === el.local.name);
         const newImport = t.ImportSpecifier(
             t.identifier(this.moduleName),
             t.identifier(this.moduleName)

@@ -4,7 +4,7 @@ const {
   transformModel,
   transformModelIndex
 } = require('./../transform/transformToAst');
-const { FilesGenerator } = require('./../until');
+const { FilesGenerator } = require('./../util');
 
 module.exports = class {
   constructor({ model, pageName, moduleName }, template) {

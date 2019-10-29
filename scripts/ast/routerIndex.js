@@ -2,7 +2,7 @@
  * @Author: guo.mk
  * @Date: 2019-04-01 19:20:21
  * @Last Modified by: guo.mk
- * @Last Modified time: 2019-04-01 19:51:16
+ * @Last Modified time: 2019-07-04 14:54:52
  */
 
 const t = require('@babel/types');
@@ -16,11 +16,10 @@ const { programHelper } = require('./astHelper');
  * @date 2019-04-01
  * @param {*} moduleName
  * @param {*} modulePath
- * @param {*} ast
  */
 module.exports = class routerAst extends astImplement {
-  constructor(moduleName, modulePath, ast) {
-    super(moduleName, modulePath, ast);
+  constructor(moduleName, modulePath,body) {
+    super(moduleName, modulePath,body);
   }
   ExportDefaultDeclaration(path) {
     const { declaration } = path.node;

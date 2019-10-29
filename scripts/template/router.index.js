@@ -1,2 +1,2 @@
-import {} from '@pages';
+import {} from '@packages';
 export default [];

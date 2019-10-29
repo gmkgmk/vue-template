@@ -11,7 +11,7 @@ const {
   pageIndexPath,
   confirmPs
 } = require('./config');
-const { FilesGenerator } = require('./until');
+const { FilesGenerator } = require('./util');
 const transformModel = require('./transform/model');
 const transformRouter = require('./transform/router');
 
@@ -69,13 +69,7 @@ class FilePath {
 // 简析page,module,services绝对地址
 function resolvePath(rootPath, { moduleName, pageName }) {
   const joinHelper = (key, suffix = '.js') =>
-    path.join(
-      rootPath,
-      pathPrefix,
-      pageConfig[key].path,
-      moduleName,
-      pageName + suffix
-    );
+    path.join(rootPath, pathPrefix, pageConfig[key].path, moduleName, pageName + suffix);
   return {
     page: joinHelper('page', '.vue'),
     services: joinHelper('services'),
@@ -99,7 +93,8 @@ function reWritePage(filePath) {
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) log(err);
     const vuexPath = `${globalFilePath.moduleName}/${globalFilePath.pageName}`;
-    const result = data.replace(/\$vuexName/g, `${vuexPath}`);
+    const componentName = `${globalFilePath.moduleName}-${globalFilePath.pageName}`;
+    const result = data.replace(/\VUEX_NAME/g, `${vuexPath}`).replace(/\COMPONENT_NAME/g, `${componentName}`);
 
     fs.writeFileSync(filePath, result, 'utf8');
   });
