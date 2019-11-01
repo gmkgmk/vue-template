@@ -7,13 +7,15 @@
 使用方法:
 1.git clone https://github.com/gmkgmk/ast-build-template.git
 
-2.使用命令 node ./scripts/cli.js
+2.npm install 
 
-3.输入相应的文件模块,文件名 列(order,list)
+3.使用命令 node ./scripts/core.js 或者 npm run generate
 
-4.自动生成文件和model,router信息,
+4.输入相应的文件模块,文件名 列(order,list)
 
-5.通过路由访问http://localhost:8080/#/layout/order/list
+5.自动生成文件和model,router信息,
+
+6.通过路由访问http://localhost:8080/#/layout/order/list
 
 效果图如下:
 

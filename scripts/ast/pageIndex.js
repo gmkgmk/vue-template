@@ -2,23 +2,23 @@
  * @Author: guo.mk
  * @Date: 2019-03-26 14:11:28
  * @Last Modified by: guo.mk
- * @Last Modified time: 2019-07-05 16:24:20
+ * @Last Modified time: 2019-11-01 11:49:50
  */
-// componentIndex AST改变
+// pageIndexAst AST
 const astImplement = require('./astImplement');
 const t = require('@babel/types');
 
 /**
- *Creates an instance of componentIndexAst.
+ *Creates an instance of pageIndexAst.
  * @date 2019-03-26
  * @param {*} moduleName
  * @param {*} modulePath
  * @param {*} [ast={ program: {} }]
- * @memberof componentIndexAst
+ * @memberof pageIndexAst
  */
-module.exports = class ComponentIndexAst extends astImplement {
-    constructor(moduleName, modulePath, ast) {
-        super(moduleName, modulePath, ast);
+module.exports = class PageIndexAst extends astImplement {
+    constructor(...props) {
+        super(...props);
     }
     ExportNamedDeclaration(path) {
         const { specifiers } = path.node;

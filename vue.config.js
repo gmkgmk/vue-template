@@ -5,5 +5,6 @@ function resolve(dir) {
 module.exports = {
   chainWebpack: config => {
     config.resolve.alias.set('@pages', resolve('/src/pages'));
+    config.resolve.alias.set('@services', resolve('/src/services'));
   }
 };

@@ -1,4 +1,4 @@
-const chalk = require("chalk");
+const { logInfo } = require('./failures');
 
 function currentPath() {
     let currentPath = () => {
@@ -7,20 +7,17 @@ function currentPath() {
     return currentPath();
 }
 
-function log() {
-    const args = Array.from(arguments);
-    args[0] = chalk.green(args[0]);
-    console.log.apply(console, args);
-}
-
-function errorLog() {
-    const args = Array.from(arguments);
-    args[0] = chalk.red(args[0]);
-    console.log.apply(console, args);
+function modifyLog({ path }, error) {
+    logInfo(
+        {
+            type: 'modify',
+            path
+        },
+        error
+    );
 }
 
 module.exports = {
     currentPath,
-    log,
-    errorLog
+    modifyLog
 };

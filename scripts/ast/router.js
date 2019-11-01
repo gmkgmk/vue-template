@@ -3,8 +3,8 @@ const astImplement = require('./astImplement');
 
 // 生成router Ast树
 module.exports = class routerAst extends astImplement {
-    constructor(moduleName, modulePath) {
-        super(moduleName, modulePath);
+    constructor(...props) {
+        super(...props);
     }
     ImportDeclaration(path) {
         const { specifiers } = path.node;
@@ -20,18 +20,9 @@ module.exports = class routerAst extends astImplement {
         if (t.isArrayExpression(declaration)) {
             const { elements } = declaration;
             const properties = [
-                t.objectProperty(
-                    t.identifier('path'),
-                    t.stringLiteral(`${this.modulePath}`)
-                ),
-                t.objectProperty(
-                    t.identifier('name'),
-                    t.stringLiteral(`${this.modulePath}`)
-                ),
-                t.objectProperty(
-                    t.identifier('component'),
-                    t.Identifier(this.moduleName)
-                )
+                t.objectProperty(t.identifier('path'), t.stringLiteral(`${this.modulePath}`)),
+                t.objectProperty(t.identifier('name'), t.stringLiteral(`${this.modulePath}`)),
+                t.objectProperty(t.identifier('component'), t.Identifier(this.moduleName))
             ];
             const element = t.objectExpression(properties);
 

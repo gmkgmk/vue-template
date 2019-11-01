@@ -12,9 +12,6 @@
   </el-container>
 </template>
 <script>
-  import _ from 'lodash';
-
-  import { createNamespacedHelpers } from 'vuex';
 
   export default {
     name: 'layout',

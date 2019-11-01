@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>el-form-generator</title>
+    <!-- 加载依赖 -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"
+    />
+    <script src="https://unpkg.com/@babel/standalone@7.4.4/babel.js"></script>
+    <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- 加载依赖 -->
+
+      <style>
+          html {
+            font-family: Tahoma;
+            font-size: 14px;
+          }
+          body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #333;
+          }
+          pre {
+            overflow: auto;
+          }
+            pre .string { color: #885800; }
+            pre .number { color: blue; }
+            pre .boolean { color: magenta; }
+            pre .null { color: red; }
+            pre .key { color: green; }
+
+          .container {
+            max-width: 970px;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+          }
+          h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 500;
+          }
+          fieldset {
+            border: 0;
+          }
+          .panel {
+            margin-bottom: 20px;
+            background-color: #fff;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+            border-color: #ddd;
+          }
+          .panel-heading {
+            color: #333;
+            background-color: #f5f5f5;
+            border-color: #ddd;
+            padding: 10px 15px;
+            border-bottom: 1px solid transparent;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+          }
+          .panel-body {
+            padding: 15px;
+          }
+      </style>
+  </head>
+  <body>
+    <h1>example</h1>
+    <div id="app">
+      <el-form-generator :schema="schema" :model-data="modelData">
+        <el-form-item label="中间数据" componentIndex="4">
+              <el-input placeholder="请输入内容" v-model='modelData.middle' />
+            </el-form-item>
+            <el-form-item label="头部数据" componentIndex="1">
+              <el-input placeholder="请输入内容" v-model='modelData.head'/>
+            </el-form-item>
+            <el-form-item label="最后数据">
+              <el-input placeholder="请输入内容" v-model='modelData.last' />
+            </el-form-item>
+      </el-form-generator>
+      <div class="panel panel-default">
+          <div class="panel-heading">Model</div>
+          <div class="panel-body">
+            <pre v-if="modelData" v-html="prettyJSON(modelData)"></pre>
+          </div>
+        </div>
+    </div>
+
+    <script src="../dist/el-form-generator.js"></script>
+    <script type="text/babel">
+      const ElFormGenerator = window['el-form-generator'];
+Vue.use(window.ELEMENT, { size: 'medium' });
+
+var App = new Vue({
+  el: '#app',
+  components: {
+    'el-form-generator': ElFormGenerator.FormGenerator
+  },
+  watch: {
+    modelData(val) {
+      console.log(val);
+    }
+  },
+  methods: {
+    // 格式化显示model
+    prettyJSON: function(json) {
+      if (json) {
+        json = JSON.stringify(json, undefined, 4);
+        json = json
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+        return json.replace(
+          /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+          function(match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+              if (/:$/.test(match)) {
+                cls = 'key';
+              } else {
+                cls = 'string';
+              }
+            } else if (/true|false/.test(match)) {
+              cls = 'boolean';
+            } else if (/null/.test(match)) {
+              cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+          }
+        );
+      }
+    }
+  },
+  data() {
+    return {
+      modelData: {
+        id: 1,
+        name: 'John Doe',
+        password: 'J0hnD03!x4',
+        skills: 'Javascript',
+        email: 'john.doe@gmail.com',
+        middle: '',
+        head: '',
+        last: '',
+        timeRange: []
+      },
+      schema: {
+        fields: [
+          {
+            type: 'input',
+            inputType: 'text',
+            label: 'ID (disabled text field)',
+            model: 'id',
+            readonly: true,
+            disabled: true,
+            formItemOption: {
+              'label-width': '300',
+              size: 'mini'
+            }
+          },
+          {
+            type: 'input',
+            inputType: 'text',
+            label: 'Name',
+            model: 'name',
+            placeholder: 'Your name',
+            featured: true,
+            required: true
+          },
+          {
+            type: 'input',
+            inputType: 'password',
+            label: 'Password',
+            model: 'password',
+            min: 6,
+            required: true,
+            hint: 'Minimum 6 characters'
+          },
+          {
+            type: 'select',
+            label: 'Skills',
+            model: 'skills',
+            options: [
+              {
+                key: '0',
+                value: 'Javascript',
+                label: '123'
+              },
+              { key: '1', value: 'VueJS' },
+              {
+                key: '2',
+                value: 'CSS3'
+              },
+              {
+                key: '4',
+                value: 'HTML5'
+              }
+            ]
+          },
+          {
+            type: 'input',
+            inputType: 'email',
+            label: 'E-mail',
+            model: 'email',
+            placeholder: "User's e-mail address"
+          },
+          {
+            type: 'datePicker',
+            dateType: 'daterange',
+            'range-separator': '~',
+            'start-placeholder': '开始日期',
+            label: '时间选择',
+            model: 'timeRange'
+          }
+        ]
+      }
+    };
+  }
+});
+
+    </script>
+  </body>
+</html>
