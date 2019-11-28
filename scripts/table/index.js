@@ -8,6 +8,7 @@ if (process.argv.length == 2) {
     throw '请选择配置文件!';
 }
 const [, , configPath, way = 'build'] = process.argv;
+console.log('way: ', way);
 
 const filePath = path.join(INIT_CWD, configPath);
 
@@ -17,8 +18,10 @@ let outPutPath = configPath;
 if (way === 'build') {
     const basename = path.basename(filePath, '.vue');
     const str = fs.readFileSync(filePath, 'utf8');
+    // rule
     const rulePath = path.join(INIT_CWD, `${basename}.js`);
     const rule = require(rulePath);
+
     result = build(str, rule);
 }
 

@@ -9,6 +9,7 @@ function compile(code, options) {
         plugins: [['jsx', require('@babel/plugin-syntax-jsx').default]]
     });
     const { type } = options;
+    
     if (type === 'number') {
         traverse.default(ast, numberVisitor(options));
     }

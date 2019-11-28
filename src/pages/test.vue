@@ -1,4 +1,14 @@
 <script>
+function init() {
+    return {
+        name: 'test',
+        timeRange: []
+    };
+}
+import _ from 'lodash';
+import { createNamespacedHelpers } from 'vuex';
+const { mapState } = createNamespacedHelpers('{{ moduleName }}/{{ pageName }}');
+
 export default {
     name: '{{ moduleName }}-{{ pageName }}-component',
     computed: {
@@ -108,7 +118,18 @@ export default {
                     </el-form-item>
                 </el-form-generator>
                 <div class='content-wrapper'>
-                    <el-table data={this.tableData} stripe border></el-table>
+                    <el-table data={this.tableData} stripe border>
+                        <el-table-column label='姓名' prop='nickName'></el-table-column>
+                        <el-table-column
+                            label='年龄'
+                            prop='age'
+                            scopedSlots={{
+                                default: props => {
+                                    return [this.toFinancialNum(props.row.age, 2)];
+                                }
+                            }}
+                        ></el-table-column>
+                    </el-table>
                     <BasePagination pageConfig={this.pageConfig} onpageChange={this.pageChange} />
                 </div>
             </div>
