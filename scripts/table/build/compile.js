@@ -1,16 +1,12 @@
-const generator = require('@babel/generator');
-const parser = require('@babel/parser');
-const traverse = require('@babel/traverse');
+/*
+ * @Author: guo.mk 
+ * @Date: 2019-11-28 18:10:45 
+ * @Last Modified by:   guo.mk 
+ * @Last Modified time: 2019-11-28 18:10:45 
+ */
+const compile = require('./../common/compile');
 const visitor = require('./visitor');
-function compile(str, rules) {
-    const ast = parser.parse(str, {
-        plugins: [['jsx', require('@babel/plugin-syntax-jsx').default]],
-        sourceType: 'module'
-    });
-    traverse.default(ast, visitor(rules));
 
-    const { code } = generator.default(ast, {}, str);
-    return code;
-}
+const build = (code, rules) => compile(code, rules, visitor);
 
-module.exports = compile;
+module.exports = build;

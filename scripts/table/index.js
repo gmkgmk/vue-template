@@ -1,3 +1,9 @@
+/*
+ * @Author: guo.mk 
+ * @Date: 2019-11-28 18:10:42 
+ * @Last Modified by: guo.mk
+ * @Last Modified time: 2019-11-28 18:14:51
+ */
 const fs = require('fs');
 const path = require('path');
 const create = require('./create');
@@ -8,7 +14,6 @@ if (process.argv.length == 2) {
     throw '请选择配置文件!';
 }
 const [, , configPath, way = 'build'] = process.argv;
-console.log('way: ', way);
 
 const filePath = path.join(INIT_CWD, configPath);
 
@@ -30,5 +35,11 @@ if (way === 'create') {
     result = create(optionList);
     outPutPath = 'result.js';
 }
+// uncode => code
+function trmsformCode(code) {
+    return unescape(code.replace(/\\u/g, '%u'));
+}
+
+result = trmsformCode(result);
 
 fs.writeFileSync(path.join(INIT_CWD, outPutPath), result, 'utf8');

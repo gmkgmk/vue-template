@@ -1,27 +1,12 @@
-const _ = require('lodash');
-const numberVisitor = require('./visitor');
-const generator = require('@babel/generator');
-const parser = require('@babel/parser');
-const traverse = require('@babel/traverse');
+/*
+ * @Author: guo.mk 
+ * @Date: 2019-11-28 18:10:35 
+ * @Last Modified by:   guo.mk 
+ * @Last Modified time: 2019-11-28 18:10:35 
+ */
+const compile = require('./../common/compile');
+const visitor = require('./visitor');
 
-function compile(code, options) {
-    const ast = parser.parse(code, {
-        plugins: [['jsx', require('@babel/plugin-syntax-jsx').default]]
-    });
-    const { type } = options;
-    
-    if (type === 'number') {
-        traverse.default(ast, numberVisitor(options));
-    }
+const create = rule => compile('', rule, visitor);
 
-    return generator.default(ast, {}, code);
-}
-
-const column = (label, prop, options) => {
-    let code = `<el-table-column label='${label}' prop='${prop}'></el-table-column>`;
-    if (_.isEmpty(options) || options.disable) return code;
-    code = compile(code, { ...options, prop }).code;
-    return code;
-};
-
-module.exports = column;
+module.exports = create;

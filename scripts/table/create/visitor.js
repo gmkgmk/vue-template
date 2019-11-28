@@ -1,14 +1,20 @@
-const t = require('@babel/types');
-const slotScope = require('./../slotScope');
-const visitor = options => {
+/*
+ * @Author: guo.mk 
+ * @Date: 2019-11-28 18:10:37 
+ * @Last Modified by:   guo.mk 
+ * @Last Modified time: 2019-11-28 18:10:37 
+ */
+const columnCreator = require('./../common/columnCreator');
+
+const visitor = list => {
     return {
-        JSXOpeningElement(path) {
-            const { node } = path;
-            if (t.isJSXIdentifier(node.name) && node.name.name === 'el-table-column') {
-                const { attributes } = node;
-                const attr = slotScope(options);
-                attributes.push(attr);
-            }
+        Program(path) {
+            const columns = list.map(el => {
+                const { label, prop, ...option } = el;
+                return columnCreator(label, prop, option);
+            });
+            
+            path.node.body = columns;
         }
     };
 };
