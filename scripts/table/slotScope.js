@@ -40,20 +40,8 @@ const creatFuncExp = option => {
     );
 };
 
-const createScope = option => {
+module.exports = option => {
     const funcExp = creatFuncExp(option);
-    return createScopeSlot(funcExp);
+    const slotScope = createScopeSlot(funcExp);
+    return t.jsxAttribute(t.jsxIdentifier('scopedSlots'), slotScope);
 };
-const visitor = options => {
-    return {
-        JSXOpeningElement(path) {
-            const { node } = path;
-            if (t.isJSXIdentifier(node.name) && node.name.name === 'el-table-column') {
-                const { attributes } = node;
-                const attr = t.jsxAttribute(t.jsxIdentifier('scopedSlots'), createScope(options));
-                attributes.push(attr);
-            }
-        }
-    };
-};
-module.exports = visitor;
