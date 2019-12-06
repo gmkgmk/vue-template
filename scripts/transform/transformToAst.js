@@ -8,7 +8,6 @@ const {
 } = require('../ast/index');
 const compile = require('./compile');
 const codeEncoding = 'utf8';
-
 /**
  * todo:
  * 修改文件
@@ -24,7 +23,7 @@ const transform = createVisitor => (...arg) => {
     // compile
     const result = compile(code, createVisitor, filePath, ...rest);
     // write
-    fs.writeFileSync(filePath, result.code, codeEncoding);
+    fs.writeFileSync(filePath, result, codeEncoding);
 };
 
 // 模板地址

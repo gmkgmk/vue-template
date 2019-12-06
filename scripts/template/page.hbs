@@ -28,7 +28,7 @@ export default {
     this.fetchData();
     this.debounceFetchList = _.debounce(this.fetchData, 300);
   },
-  data: function() {
+  data() {
     return {
       loading: false,
       pageConfig: {},

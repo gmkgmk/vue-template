@@ -1,9 +1,15 @@
+const path = require('path');
 const generator = require('@babel/generator');
 const parser = require('@babel/parser');
 const traverse = require('@babel/traverse');
 const visitorFactory = require('./visitorFactory');
+const prettier = require('prettier');
 
-// ast流程
+let prettierConfig = null;
+try {
+  prettierConfig = require(path.join(process.cwd(), '.prettierrc.js'));
+} catch (error) {}
+// ast流程 
 /**
  * todo:
  * 1.parse code to  ast
@@ -17,17 +23,23 @@ const visitorFactory = require('./visitorFactory');
  * @param {ast} createVisitor ast操作代码
  */
 function compile(code, createVisitor, filePath, moduleName, modulePath) {
-    const ast = parser.parse(code, {
-        allowImportExportEverywhere: true,
-        plugins: [['dynamicImport', require('@babel/plugin-syntax-dynamic-import').default]]
-    });
+  const ast = parser.parse(code, {
+    allowImportExportEverywhere: true,
+    plugins: [['dynamicImport', require('@babel/plugin-syntax-dynamic-import').default]]
+  });
 
-    const visitorPlugin = new createVisitor(filePath, moduleName, modulePath, ast.program.body);
+  const visitorPlugin = new createVisitor(filePath, moduleName, modulePath, ast.program.body);
 
-    const visitor = visitorFactory(visitorPlugin);
-    traverse.default(ast, visitor);
+  const visitor = visitorFactory(visitorPlugin);
+  traverse.default(ast, visitor);
 
-    return generator.default(ast, {}, code);
+  let { code: source } = generator.default(ast, {}, code);
+
+  if (prettierConfig) {
+    source = prettier.format(source, prettierConfig);
+  }
+
+  return source;
 }
 
 module.exports = compile;
