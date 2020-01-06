@@ -4,6 +4,6 @@ module.exports = {
   base: '/',
   themeConfig: {
     sidebarDepth: 2,
-    sidebar: ['/component/', '/component/el-form-generator', '/component/getter-start']
+    sidebar: ['/component/', '/component/el-form-generator', '/component/table']
   }
 };

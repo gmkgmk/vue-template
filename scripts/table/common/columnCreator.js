@@ -2,7 +2,7 @@
  * @Author: guo.mk
  * @Date: 2019-11-28 18:10:27
  * @Last Modified by: guo.mk
- * @Last Modified time: 2020-01-06 11:50:36
+ * @Last Modified time: 2020-01-06 15:58:36
  */
 const t = require('@babel/types');
 const _ = require('lodash');
@@ -24,7 +24,7 @@ const columnCreator = (labal, prop, options) => {
   // 增加slotScope
   // disable代表忽略这个col 的 slotScope
   if (!_.isEmpty(options) || options.disable) {
-    attributes.push(slotScope({ ...options, prop }));
+    attributes.push(slotScope({ ...options, prop, ...options.option }));
   }
 
   return t.jsxElement(

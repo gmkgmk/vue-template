@@ -1,6 +1,6 @@
-## 表单渲染
+## 表单渲染器
 
-用于页面中展示重要的提示信息。
+用于页面中表单的生成。
 
 ### 快速开始
 
@@ -181,7 +181,7 @@ render(){
 
 :::
 
-### setOptionToSchema 使用方法
+### setOptionToSchema
 
 ```jsx
 import { setOptionToSchema } from 'el-form-generator';
@@ -219,7 +219,7 @@ mounted(){
 }
 ```
 
-### findSchemaIndex 使用方法
+### findSchemaIndex 
 
 ```jsx
 import { findSchemaIndex } from 'el-form-generator';
@@ -310,3 +310,9 @@ optionName 实现如下
 | ----------------- | ------------------------------------- | -------------------- |
 | setOptionToSchema | 设置属性到 options 类型的 Option 属性 | modalName,optionList |
 | findSchemaIndex   | 获取属性的 Index 值                   | modalName            |
+
+### 更多
+可在 `heyguys\src\packages\common\global\el-form-generator\src` 中自定义相关组件
+命名为 field + 自定义名称
+然后在
+`heyguys\src\packages\common\global\el-form-generator\src\index.js` 中引入依赖

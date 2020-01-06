@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>表单渲染器 | 好伙计后台管理文档</title>
+    <meta name="description" content="网站描述">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.3a97b1b4.css" as="style"><link rel="preload" href="/assets/js/app.18e1d367.js" as="script"><link rel="preload" href="/assets/js/2.32076899.js" as="script"><link rel="preload" href="/assets/js/7.94d8cf62.js" as="script"><link rel="prefetch" href="/assets/js/3.a459754e.js"><link rel="prefetch" href="/assets/js/4.037a9d1c.js"><link rel="prefetch" href="/assets/js/5.79aa5aa4.js"><link rel="prefetch" href="/assets/js/6.57e53b22.js"><link rel="prefetch" href="/assets/js/8.bb42d5df.js"><link rel="prefetch" href="/assets/js/9.da92577e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.3a97b1b4.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">好伙计后台管理文档</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="/component/" class="sidebar-link">Introduction</a></li><li><a href="/component/el-form-generator.html" class="active sidebar-link">表单渲染器</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/component/el-form-generator.html#表单渲染器" class="sidebar-link">表单渲染器</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/component/el-form-generator.html#快速开始" class="sidebar-link">快速开始</a></li><li class="sidebar-sub-header"><a href="/component/el-form-generator.html#基本用法" class="sidebar-link">基本用法</a></li><li class="sidebar-sub-header"><a href="/component/el-form-generator.html#带有时间选择期" class="sidebar-link">带有时间选择期</a></li><li class="sidebar-sub-header"><a href="/component/el-form-generator.html#带下拉框" class="sidebar-link">带下拉框</a></li><li class="sidebar-sub-header"><a href="/component/el-form-generator.html#自定义位置" class="sidebar-link">自定义位置</a></li><li class="sidebar-sub-header"><a href="/component/el-form-generator.html#setoptiontoschema" class="sidebar-link">setOptionToSchema</a></li><li class="sidebar-sub-header"><a href="/component/el-form-generator.html#findschemaindex" class="sidebar-link">findSchemaIndex</a></li><li class="sidebar-sub-header"><a href="/component/el-form-generator.html#attributes" class="sidebar-link">Attributes</a></li><li class="sidebar-sub-header"><a href="/component/el-form-generator.html#select-attributes" class="sidebar-link">Select Attributes</a></li><li class="sidebar-sub-header"><a href="/component/el-form-generator.html#helper" class="sidebar-link">helper</a></li><li class="sidebar-sub-header"><a href="/component/el-form-generator.html#更多" class="sidebar-link">更多</a></li></ul></li></ul></li><li><a href="/component/table.html" class="sidebar-link">表格渲染器</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="表单渲染器"><a href="#表单渲染器" class="header-anchor">#</a> 表单渲染器</h2> <p>用于页面中表单的生成。</p> <h3 id="快速开始"><a href="#快速开始" class="header-anchor">#</a> 快速开始</h3> <pre><code>npm i el-form-generator -S
+
+##### 快速使用
+```
+main&gt;js
+    import Vue from 'vue';
+    import ElementUI from 'element-ui';
+    import ElFormGenerator from 'el-form-generator';
+    Vue.use(ElementUI);
+    Vue.use(ElFormGenerator);
+```
+</code></pre> <h3 id="基本用法"><a href="#基本用法" class="header-anchor">#</a> 基本用法</h3> <p>基础的表单渲染用法。</p> <p>render 部分</p> <div class="language-jsx extra-class"><pre class="language-jsx"><code><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      schema<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        fields<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            type<span class="token punctuation">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+            inputType<span class="token punctuation">:</span> <span class="token string">'text'</span><span class="token punctuation">,</span>
+            label<span class="token punctuation">:</span> <span class="token string">'姓名'</span><span class="token punctuation">,</span>
+            model<span class="token punctuation">:</span> <span class="token string">'poNo'</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      modelData<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          name<span class="token punctuation">:</span><span class="token keyword">null</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-form-generator</span> <span class="token attr-name">schema</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>schema<span class="token punctuation">}</span></span> <span class="token attr-name">model-data</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>modelData<span class="token punctuation">}</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>:::</p> <h3 id="带有时间选择期"><a href="#带有时间选择期" class="header-anchor">#</a> 带有时间选择期</h3> <p>带有时间选择器</p> <p>render 部分</p> <div class="language-jsx extra-class"><pre class="language-jsx"><code><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      schema<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        fields<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+             <span class="token punctuation">{</span>
+            type<span class="token punctuation">:</span> <span class="token string">'datePicker'</span><span class="token punctuation">,</span>
+            dateType<span class="token punctuation">:</span> <span class="token string">'daterange'</span><span class="token punctuation">,</span>
+            <span class="token string">'range-separator'</span><span class="token punctuation">:</span> <span class="token string">'~'</span><span class="token punctuation">,</span>
+            <span class="token string">'start-placeholder'</span><span class="token punctuation">:</span> <span class="token string">'开始日期'</span><span class="token punctuation">,</span>
+            label<span class="token punctuation">:</span> <span class="token string">'时间选择'</span><span class="token punctuation">,</span>
+            model<span class="token punctuation">:</span> <span class="token string">'timeRange'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      modelData<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          timeRange<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-form-generator</span> <span class="token attr-name">schema</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>schema<span class="token punctuation">}</span></span> <span class="token attr-name">model-data</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>modelData<span class="token punctuation">}</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>:::</p> <h3 id="带下拉框"><a href="#带下拉框" class="header-anchor">#</a> 带下拉框</h3> <p>下拉框</p> <div class="language-jsx extra-class"><pre class="language-jsx"><code><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      schema<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        fields<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+           <span class="token punctuation">{</span>
+            type<span class="token punctuation">:</span> <span class="token string">'select'</span><span class="token punctuation">,</span>
+            label<span class="token punctuation">:</span> <span class="token string">'Skills'</span><span class="token punctuation">,</span>
+            model<span class="token punctuation">:</span> <span class="token string">'skills'</span><span class="token punctuation">,</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+              <span class="token punctuation">{</span>
+                key<span class="token punctuation">:</span> <span class="token string">'0'</span><span class="token punctuation">,</span>
+                value<span class="token punctuation">:</span> <span class="token string">'Javascript'</span><span class="token punctuation">,</span>
+                label<span class="token punctuation">:</span> <span class="token string">'123'</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token punctuation">{</span> key<span class="token punctuation">:</span> <span class="token string">'1'</span><span class="token punctuation">,</span> value<span class="token punctuation">:</span> <span class="token string">'VueJS'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token punctuation">{</span>
+                key<span class="token punctuation">:</span> <span class="token string">'2'</span><span class="token punctuation">,</span>
+                value<span class="token punctuation">:</span> <span class="token string">'CSS3'</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token punctuation">{</span>
+                key<span class="token punctuation">:</span> <span class="token string">'4'</span><span class="token punctuation">,</span>
+                value<span class="token punctuation">:</span> <span class="token string">'HTML5'</span>
+              <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      modelData<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          skills<span class="token punctuation">:</span><span class="token keyword">null</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-form-generator</span> <span class="token attr-name">schema</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>schema<span class="token punctuation">}</span></span> <span class="token attr-name">model-data</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>modelData<span class="token punctuation">}</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>:::</p> <h3 id="自定义位置"><a href="#自定义位置" class="header-anchor">#</a> 自定义位置</h3> <div class="language-jsx extra-class"><pre class="language-jsx"><code><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      schema<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        fields<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+             <span class="token punctuation">{</span>
+                type<span class="token punctuation">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                inputType<span class="token punctuation">:</span> <span class="token string">'text'</span><span class="token punctuation">,</span>
+                label<span class="token punctuation">:</span> <span class="token string">'姓名'</span><span class="token punctuation">,</span>
+                model<span class="token punctuation">:</span> <span class="token string">'name'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                type<span class="token punctuation">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                inputType<span class="token punctuation">:</span> <span class="token string">'text'</span><span class="token punctuation">,</span>
+                label<span class="token punctuation">:</span> <span class="token string">'年龄'</span><span class="token punctuation">,</span>
+                model<span class="token punctuation">:</span> <span class="token string">'age'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                type<span class="token punctuation">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                inputType<span class="token punctuation">:</span> <span class="token string">'text'</span><span class="token punctuation">,</span>
+                label<span class="token punctuation">:</span> <span class="token string">'ID'</span><span class="token punctuation">,</span>
+                model<span class="token punctuation">:</span> <span class="token string">'id'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      modelData<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          number<span class="token punctuation">:</span><span class="token keyword">null</span><span class="token punctuation">,</span>
+          age<span class="token punctuation">:</span><span class="token keyword">null</span><span class="token punctuation">,</span>
+          id<span class="token punctuation">:</span><span class="token keyword">null</span><span class="token punctuation">,</span>
+          name<span class="token punctuation">:</span><span class="token keyword">null</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-form-generator</span> <span class="token attr-name">schema</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>schema<span class="token punctuation">}</span></span> <span class="token attr-name">model-data</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>modelData<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-form-item</span> <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>中间数据<span class="token punctuation">&quot;</span></span> <span class="token attr-name">componentIndex</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+              </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-input</span>  <span class="token attr-name">v-model</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>model<span class="token punctuation">.</span>number<span class="token punctuation">}</span></span> <span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-form-item</span><span class="token punctuation">&gt;</span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-form-generator</span><span class="token punctuation">&gt;</span></span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>:::</p> <h3 id="setoptiontoschema"><a href="#setoptiontoschema" class="header-anchor">#</a> setOptionToSchema</h3> <div class="language-jsx extra-class"><pre class="language-jsx"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> setOptionToSchema <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'el-form-generator'</span><span class="token punctuation">;</span>
+<span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      schema<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        fields<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            type<span class="token punctuation">:</span> <span class="token string">'select'</span><span class="token punctuation">,</span>
+            label<span class="token punctuation">:</span> <span class="token string">'Skills'</span><span class="token punctuation">,</span>
+            model<span class="token punctuation">:</span> <span class="token string">'skills'</span><span class="token punctuation">,</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      modelData<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          skills<span class="token punctuation">:</span><span class="token keyword">null</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-form-generator</span> <span class="token attr-name">schema</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>schema<span class="token punctuation">}</span></span> <span class="token attr-name">model-data</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>modelData<span class="token punctuation">}</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">const</span> optionData<span class="token operator">=</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>key<span class="token punctuation">:</span> <span class="token string">'0'</span><span class="token punctuation">,</span>value<span class="token punctuation">:</span> <span class="token string">'Javascript'</span><span class="token punctuation">,</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>key<span class="token punctuation">:</span> <span class="token string">'1'</span><span class="token punctuation">,</span> value<span class="token punctuation">:</span> <span class="token string">'VueJS'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>key<span class="token punctuation">:</span> <span class="token string">'2'</span><span class="token punctuation">,</span>value<span class="token punctuation">:</span> <span class="token string">'CSS3'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>key<span class="token punctuation">:</span> <span class="token string">'4'</span><span class="token punctuation">,</span>value<span class="token punctuation">:</span> <span class="token string">'HTML5'</span><span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token function">setOptionToSchema</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token string">'skills'</span><span class="token punctuation">,</span> optionData<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="findschemaindex"><a href="#findschemaindex" class="header-anchor">#</a> findSchemaIndex</h3> <div class="language-jsx extra-class"><pre class="language-jsx"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> findSchemaIndex <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'el-form-generator'</span><span class="token punctuation">;</span>
+<span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      schema<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        fields<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                type<span class="token punctuation">:</span> <span class="token string">'select'</span><span class="token punctuation">,</span>
+                label<span class="token punctuation">:</span> <span class="token string">'Skills'</span><span class="token punctuation">,</span>
+                model<span class="token punctuation">:</span> <span class="token string">'skills'</span><span class="token punctuation">,</span>
+                options<span class="token punctuation">:</span><span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>key<span class="token punctuation">:</span> <span class="token string">'0'</span><span class="token punctuation">,</span>value<span class="token punctuation">:</span> <span class="token string">'Javascript'</span><span class="token punctuation">,</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+                    <span class="token punctuation">{</span>key<span class="token punctuation">:</span> <span class="token string">'1'</span><span class="token punctuation">,</span> value<span class="token punctuation">:</span> <span class="token string">'VueJS'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                    <span class="token punctuation">{</span>key<span class="token punctuation">:</span> <span class="token string">'2'</span><span class="token punctuation">,</span>value<span class="token punctuation">:</span> <span class="token string">'CSS3'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+                    <span class="token punctuation">{</span>key<span class="token punctuation">:</span> <span class="token string">'4'</span><span class="token punctuation">,</span>value<span class="token punctuation">:</span> <span class="token string">'HTML5'</span><span class="token punctuation">}</span>
+                <span class="token punctuation">]</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      modelData<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          skills<span class="token punctuation">:</span><span class="token keyword">null</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-form-generator</span> <span class="token attr-name">schema</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>schema<span class="token punctuation">}</span></span> <span class="token attr-name">model-data</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>modelData<span class="token punctuation">}</span></span><span class="token punctuation">/&gt;</span></span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">const</span> schemaIndex <span class="token operator">=</span>  <span class="token function">findSchemaIndex</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token string">'skills'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>$<span class="token keyword">set</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>schema<span class="token punctuation">.</span>fields<span class="token punctuation">[</span>schemaIndex<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'disabled'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="attributes"><a href="#attributes" class="header-anchor">#</a> Attributes</h3> <table><thead><tr><th>参数</th> <th>说明</th> <th>类型</th></tr></thead> <tbody><tr><td>schema</td> <td>渲染表单的数据</td> <td>Object</td></tr> <tr><td>model-data</td> <td>表单控制的 model</td> <td>Object</td></tr> <tr><td>autoUpdateModel</td> <td>是否自动更新组件:表单数据修改后会自动更改 组件的 modelData 属性 ,false 表示不自动更新(可以通过 model-updated 事件获取监听属性)</td> <td>Boolean(默认 true)</td></tr> <tr><td>formOptions</td> <td>el-form 的配置选项,见配置 https://element.eleme.io/#/zh-CN/component/form#form-item-methods</td> <td>Object</td></tr> <tr><td>其他属性</td> <td>其他属性全部会付托在对应的组件上,比如 el-input 的属性</td> <td>Object</td></tr></tbody></table> <p>formOptions 实现如下</p> <div class="language-jsx extra-class"><pre class="language-jsx"><code>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-form</span> <span class="token attr-name">props</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>formOptions<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-form</span><span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+</span></code></pre></div><h3 id="select-attributes"><a href="#select-attributes" class="header-anchor">#</a> Select Attributes</h3> <table><thead><tr><th>参数</th> <th>说明</th> <th>类型</th></tr></thead> <tbody><tr><td>formItemOption</td> <td>el-form-item 的配置选项,见 https://element.eleme.io/#/zh-CN/component/form#form-item-attributes</td> <td>Object</td></tr> <tr><td>optionName</td> <td>key,value 键名</td> <td></td></tr> <tr><td>Object</td> <td></td> <td></td></tr></tbody></table> <p>optionName 实现如下</p> <div class="language-jsx extra-class"><pre class="language-jsx"><code>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-select</span> <span class="token attr-name">props</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>formItemOption<span class="token punctuation">}</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-select</span><span class="token punctuation">/&gt;</span></span><span class="token plain-text">
+</span></code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">'select'</span><span class="token punctuation">,</span>
+    label<span class="token punctuation">:</span> <span class="token string">'类型'</span><span class="token punctuation">,</span>
+    model<span class="token punctuation">:</span> <span class="token string">'type'</span><span class="token punctuation">,</span>
+    formItemOption<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        required<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    optionName<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        keyName<span class="token punctuation">:</span> <span class="token string">'key'</span><span class="token punctuation">,</span>
+        valueName<span class="token punctuation">:</span> <span class="token string">'value'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    options<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre></div><h3 id="helper"><a href="#helper" class="header-anchor">#</a> helper</h3> <table><thead><tr><th>事件名称</th> <th>说明</th> <th>参数</th></tr></thead> <tbody><tr><td>setOptionToSchema</td> <td>设置属性到 options 类型的 Option 属性</td> <td>modalName,optionList</td></tr> <tr><td>findSchemaIndex</td> <td>获取属性的 Index 值</td> <td>modalName</td></tr></tbody></table> <h3 id="更多"><a href="#更多" class="header-anchor">#</a> 更多</h3> <p>可在 <code>heyguys\src\packages\common\global\el-form-generator\src</code> 中自定义相关组件
+命名为 field + 自定义名称
+然后在
+<code>heyguys\src\packages\common\global\el-form-generator\src\index.js</code> 中引入依赖</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/component/" class="prev router-link-active">Introduction</a></span> <span class="next"><a href="/component/table.html">表格渲染器</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.18e1d367.js" defer></script><script src="/assets/js/2.32076899.js" defer></script><script src="/assets/js/7.94d8cf62.js" defer></script>
+  </body>
+</html>

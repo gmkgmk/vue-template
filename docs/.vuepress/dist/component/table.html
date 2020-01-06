@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>表格渲染器 | 好伙计后台管理文档</title>
+    <meta name="description" content="网站描述">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.3a97b1b4.css" as="style"><link rel="preload" href="/assets/js/app.18e1d367.js" as="script"><link rel="preload" href="/assets/js/2.32076899.js" as="script"><link rel="preload" href="/assets/js/8.bb42d5df.js" as="script"><link rel="prefetch" href="/assets/js/3.a459754e.js"><link rel="prefetch" href="/assets/js/4.037a9d1c.js"><link rel="prefetch" href="/assets/js/5.79aa5aa4.js"><link rel="prefetch" href="/assets/js/6.57e53b22.js"><link rel="prefetch" href="/assets/js/7.94d8cf62.js"><link rel="prefetch" href="/assets/js/9.da92577e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.3a97b1b4.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">好伙计后台管理文档</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="/component/" class="sidebar-link">Introduction</a></li><li><a href="/component/el-form-generator.html" class="sidebar-link">表单渲染器</a></li><li><a href="/component/table.html" class="active sidebar-link">表格渲染器</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/component/table.html#表格渲染器" class="sidebar-link">表格渲染器</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/component/table.html#快速开始" class="sidebar-link">快速开始</a></li><li class="sidebar-sub-header"><a href="/component/table.html#build-模式" class="sidebar-link">build 模式</a></li><li class="sidebar-sub-header"><a href="/component/table.html#create-模式" class="sidebar-link">create 模式</a></li><li class="sidebar-sub-header"><a href="/component/table.html#参数" class="sidebar-link">参数</a></li></ul></li></ul></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="表格渲染器"><a href="#表格渲染器" class="header-anchor">#</a> 表格渲染器</h2> <p>用于页面中展示重要的提示信息。</p> <h3 id="快速开始"><a href="#快速开始" class="header-anchor">#</a> 快速开始</h3> <p>方法一:</p> <div class="language-js extra-class"><pre class="language-js"><code>node <span class="token punctuation">.</span><span class="token operator">/</span>scripts<span class="token operator">/</span>table<span class="token operator">/</span>index<span class="token punctuation">.</span>js 文件名 <span class="token function">参数</span><span class="token punctuation">(</span>可省略<span class="token punctuation">)</span>
+</code></pre></div><p>方法二:</p> <div class="language-js extra-class"><pre class="language-js"><code>npm run table 文件名 <span class="token function">参数</span><span class="token punctuation">(</span>可省略<span class="token punctuation">)</span>
+</code></pre></div><h3 id="build-模式"><a href="#build-模式" class="header-anchor">#</a> build 模式</h3> <p><strong>直接新增/修改 el-table 内容</strong></p> <p>需要修改的文件下建立同名<code>.js</code> 文件作为配置文件</p> <p>比如:</p> <div class="language- extra-class"><pre class="language-text"><code>.
+├─ example
+   ├─ table.vue
+   └─ table.js
+</code></pre></div><p><code>table.vue</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  name<span class="token punctuation">:</span> <span class="token string">'table-example-component'</span><span class="token punctuation">,</span>
+  <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      tableData<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  methods<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;vue-wrapper&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;content-wrapper&quot;</span><span class="token operator">&gt;</span>
+          <span class="token operator">&lt;</span>el<span class="token operator">-</span>table data<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>tableData<span class="token punctuation">}</span> stripe border fit highlight<span class="token operator">-</span>current<span class="token operator">-</span>row<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>el<span class="token operator">-</span>table<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p><code>table.js</code></p> <div class="language-js extra-class"><pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    label<span class="token punctuation">:</span> <span class="token string">'姓名'</span><span class="token punctuation">,</span>
+    prop<span class="token punctuation">:</span> <span class="token string">'name'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    label<span class="token punctuation">:</span> <span class="token string">'性别'</span><span class="token punctuation">,</span>
+    prop<span class="token punctuation">:</span> <span class="token string">'sex'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    label<span class="token punctuation">:</span> <span class="token string">'年龄'</span><span class="token punctuation">,</span>
+    prop<span class="token punctuation">:</span> <span class="token string">'age'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    label<span class="token punctuation">:</span> <span class="token string">'地区'</span><span class="token punctuation">,</span>
+    prop<span class="token punctuation">:</span> <span class="token string">'local'</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre></div><p>使用 <code>npm run table table.vue</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  name<span class="token punctuation">:</span> <span class="token string">'table-example-component'</span><span class="token punctuation">,</span>
+  <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      tableData<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  methods<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;vue-wrapper&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;content-wrapper&quot;</span><span class="token operator">&gt;</span>
+          <span class="token operator">&lt;</span>el<span class="token operator">-</span>table data<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>tableData<span class="token punctuation">}</span> stripe border fit highlight<span class="token operator">-</span>current<span class="token operator">-</span>row<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>el<span class="token operator">-</span>table<span class="token operator">-</span>column label<span class="token operator">=</span><span class="token string">&quot;姓名&quot;</span> prop<span class="token operator">=</span><span class="token string">&quot;name&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>el<span class="token operator">-</span>table<span class="token operator">-</span>column label<span class="token operator">=</span><span class="token string">&quot;性别&quot;</span> prop<span class="token operator">=</span><span class="token string">&quot;sex&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>el<span class="token operator">-</span>table<span class="token operator">-</span>column label<span class="token operator">=</span><span class="token string">&quot;年龄&quot;</span> prop<span class="token operator">=</span><span class="token string">&quot;age&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>el<span class="token operator">-</span>table<span class="token operator">-</span>column label<span class="token operator">=</span><span class="token string">&quot;地区&quot;</span> prop<span class="token operator">=</span><span class="token string">&quot;local&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+          <span class="token operator">&lt;</span><span class="token operator">/</span>el<span class="token operator">-</span>table<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="create-模式"><a href="#create-模式" class="header-anchor">#</a> create 模式</h3> <p><strong>单独渲染 el-table-column</strong></p> <div class="language- extra-class"><pre class="language-text"><code>npm run table  .\form.js create
+</code></pre></div><p><code>form.js</code></p> <div class="language-js extra-class"><pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    label<span class="token punctuation">:</span> <span class="token string">'姓名'</span><span class="token punctuation">,</span>
+    prop<span class="token punctuation">:</span> <span class="token string">'name'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    label<span class="token punctuation">:</span> <span class="token string">'性别'</span><span class="token punctuation">,</span>
+    prop<span class="token punctuation">:</span> <span class="token string">'sex'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    label<span class="token punctuation">:</span> <span class="token string">'年龄'</span><span class="token punctuation">,</span>
+    prop<span class="token punctuation">:</span> <span class="token string">'age'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    label<span class="token punctuation">:</span> <span class="token string">'地区'</span><span class="token punctuation">,</span>
+    prop<span class="token punctuation">:</span> <span class="token string">'local'</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre></div><p><code>output</code> -&gt; <code>result.js</code></p> <div class="language- extra-class"><pre class="language-text"><code>&lt;el-table-column label=&quot;姓名&quot; prop=&quot;name&quot;&gt;&lt;/el-table-column&gt;
+&lt;el-table-column label=&quot;性别&quot; prop=&quot;sex&quot;&gt;&lt;/el-table-column&gt;
+&lt;el-table-column label=&quot;年龄&quot; prop=&quot;age&quot;&gt;&lt;/el-table-column&gt;
+&lt;el-table-column label=&quot;地区&quot; prop=&quot;local&quot;&gt;&lt;/el-table-column&gt;
+</code></pre></div><h3 id="参数"><a href="#参数" class="header-anchor">#</a> 参数</h3> <table><thead><tr><th>参数名称</th> <th>说明</th> <th>参数</th></tr></thead> <tbody><tr><td>label</td> <td>el-table-column label 属性</td> <td>String</td></tr> <tr><td>prop</td> <td>el-table-column prop 属性(修改时根据 prop 进行新旧对比)</td> <td>string</td></tr> <tr><td>type</td> <td>仅支持数字模式</td> <td>'number'</td></tr> <tr><td>option</td> <td>其他配置</td> <td>Object</td></tr></tbody></table> <p><code>option</code></p> <table><thead><tr><th>参数名称</th> <th>说明</th> <th>参数</th></tr></thead> <tbody><tr><td>thisErp</td> <td>this 的名称,一般情况下为 this(有可能为 parent 等)</td> <td>String</td></tr> <tr><td>decimal</td> <td>保留小数位数</td> <td>number</td></tr> <tr><td>funcName</td> <td>调用的方法名称</td> <td>String</td></tr> <tr><td>propsName</td> <td>props 名称</td> <td>String</td></tr></tbody></table></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/component/el-form-generator.html" class="prev">表单渲染器</a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.18e1d367.js" defer></script><script src="/assets/js/2.32076899.js" defer></script><script src="/assets/js/8.bb42d5df.js" defer></script>
+  </body>
+</html>

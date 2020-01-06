@@ -1,27 +1,20 @@
 module.exports = [
   {
-    label: '学习学习',
-    prop: 'study'
+    label: '姓名',
+    prop: 'name'
   },
   {
-    label: '采购价格',
-    prop: 'price'
+    label: '性别',
+    prop: 'sex'
   },
   {
-    label: '采购数量',
-    prop: 'number'
+    label: '年龄',
+    prop: 'age'
   },
   {
-    label: '采购金额',
-    prop: 'amount'
-  },
-  {
-    label: '运费（不含税）',
-    prop: 'freightExcludingTax'
-  },
-  {
-    label: '运费（含税）',
-    prop: 'freightIncludingTax'
+    label: '地区',
+    prop: 'local',
+    type: 'number'
   }
 ];
 
