@@ -2,7 +2,7 @@
  * @Author: guo.mk
  * @Date: 2019-11-28 14:55:35
  * @Last Modified by: guo.mk
- * @Last Modified time: 2019-11-28 18:09:55
+ * @Last Modified time: 2020-01-06 13:46:14
  * 输出到vue => el-table里
  */
 const compile = require('./build/compile');
@@ -24,7 +24,7 @@ module.exports = (code, rules) => {
     const startStr = code.substring(0, startIndex);
     const endStr = code.substring(endIndex);
 
-    const result = compile(str, rules).code;
+    const result = compile(str, rules);
     
     return outScript(result, startStr, endStr);
 };
