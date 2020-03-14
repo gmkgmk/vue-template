@@ -1,34 +1,13 @@
-<template>
-  <div>
-    假装这是登录
-    <router-link to="layout/order/list">去订单</router-link>
-  </div>
-</template>
 <script>
-  function init() {
-    return {};
+export default {
+  name: 'login-page',
+  render() {
+    return (
+      <div>
+        假装这是登录
+        <router-link to="layout">点击去首页</router-link>
+      </div>
+    );
   }
-
-  export default {
-    name: 'login-component',
-    data: function() {
-      return {
-        query: init(),
-        pageConfig: {},
-        warehouseList: [
-          {
-            warehouseName: '深圳仓库',
-            id: 0
-          },
-          {
-            warehouseName: '广州仓库',
-            id: 1
-          }
-        ]
-      };
-    },
-    methods: {
-      toClear() {}
-    }
-  };
+};
 </script>

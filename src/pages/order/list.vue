@@ -7,9 +7,9 @@
   }
   import _ from 'lodash';
   import { createNamespacedHelpers } from 'vuex';
-  const { mapState } = createNamespacedHelpers('{{ moduleName }}/{{ pageName }}');
+  const { mapState } = createNamespacedHelpers('order/list');
   export default {
-    name: '{{ moduleName }}-{{ pageName }}-component',
+    name: 'order-list-component',
     computed: {
       ...mapState({
         tableData: state => state.tableData
@@ -91,7 +91,7 @@
 
         this.loading = true;
         const { currentNo, totalElements } = await this.$store.dispatch({
-          type: '{{ moduleName }}/{{ pageName }}/FETCH_LIST',
+          type: 'order/list/FETCH_LIST',
           payload: param
         });
         this.loading = false;
