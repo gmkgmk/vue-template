@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Login from '@pages/login.vue';
-import layout from './routes';
+import { Layout } from '@pages';
 Vue.use(VueRouter);
-const routes = [
+const routerContext = require.context('./routes', true, /\.js$/);
+const route = routerContext.keys().reduce((p, r) => p.concat(routerContext(r).default), []);
+let routes = [
   {
     path: '/',
     redirect: '/login'
@@ -13,9 +15,15 @@ const routes = [
     name: 'login',
     component: Login
   },
-  layout
+  {
+    path: '/layout',
+    name: 'layout',
+    component: Layout,
+    children: route
+  }
 ];
 const router = new VueRouter({
+  mode: 'history',
   routes
 });
 export default router;

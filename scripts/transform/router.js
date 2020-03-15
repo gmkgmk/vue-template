@@ -20,7 +20,7 @@ module.exports = class {
     // 1.重写路由信息
     // 2.page/index.js导出文件
     async transformRouter() {
-        this.routerIndex();
+        // this.routerIndex();
         // 重写路由信息
         this.route();
         // 重写pagesIndex信息

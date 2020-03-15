@@ -7,5 +7,6 @@ module.exports = {
   requireConfig: false,
   useTabs: false,
   trailingComma: 'none',
-  semi: true
+  semi: true,
+  parser: 'babel'
 };
