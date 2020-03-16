@@ -7,7 +7,7 @@
   }
   import _ from 'lodash';
   import { createNamespacedHelpers } from 'vuex';
-  const { mapState } = createNamespacedHelpers('{{ moduleName }}/{{ pageName }}');
+  const { mapState, mapActions } = createNamespacedHelpers('{{ moduleName }}/{{ pageName }}');
   export default {
     name: '{{ moduleName }}-{{ pageName }}-component',
     computed: {
@@ -76,13 +76,7 @@
       }
     },
     methods: {
-      toClear() {
-        this.modelData = init();
-      },
-      pageChange(newPageConfig) {
-        this.pageConfig = _.cloneDeep(newPageConfig);
-        this.fetchData();
-      },
+      ...mapActions(['FETCH_LIST']),
       async fetchData() {
         const param = {
           ...this.modelData,
@@ -90,10 +84,7 @@
         };
 
         this.loading = true;
-        const { currentNo, totalElements } = await this.$store.dispatch({
-          type: '{{ moduleName }}/{{ pageName }}/FETCH_LIST',
-          payload: param
-        });
+        const { currentNo, totalElements } = await this.FETCH_LIST(param);
         this.loading = false;
 
         this.pageConfig = {
@@ -101,6 +92,14 @@
           currentNo,
           total: totalElements
         };
+
+      },
+      toClear() {
+        this.modelData = init();
+      },
+      pageChange(newPageConfig) {
+        this.pageConfig = _.cloneDeep(newPageConfig);
+        this.fetchData();
       }
     },
     render() {
