@@ -6,13 +6,14 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
-        "dll": "webpack --color  --config ./webpack.dll.js",
         "g": "plop",
-        "table": "node ./scripts/table/index.js"
+        "table": "node ./scripts/table/index.js",
+        "build:stats": "vue-cli-service build --mode prod --json > stats.json",
+        "inspect": "vue-cli-service inspect",
+        "inspectOut": "vue inspect > output.js"
     },
     "dependencies": {
         "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
-        "add-asset-html-webpack-plugin": "^3.1.3",
         "element-ui": "^2.13.0",
         "vue": "^2.6.11",
         "vue-router": "^3.1.6",
