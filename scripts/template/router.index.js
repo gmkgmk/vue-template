@@ -1,2 +1,2 @@
-import {} from '@pages';
+import {} from '@pages/{{ moduleName }}';
 export default [];

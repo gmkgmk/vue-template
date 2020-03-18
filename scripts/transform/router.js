@@ -8,9 +8,8 @@ module.exports = class {
   constructor({ routerPath, pageName, moduleName, pageIndexPath }) {
     this.pageName = pageName;
     this.moduleName = moduleName;
-    this.routeIndex = path.join(routerPath, 'index.js');
     this.routePath = path.join(routerPath, `${this.moduleName}.js`);
-    this.componentIndexPath = path.join(pageIndexPath);
+    this.componentIndexPath = path.join(pageIndexPath, moduleName, 'index.js');
     this.run();
   }
   run() {

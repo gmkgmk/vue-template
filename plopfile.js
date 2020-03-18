@@ -41,6 +41,12 @@ module.exports = function(plop) {
         },
         {
           type: 'add',
+          path: 'src/pages/{{moduleName}}/index.js',
+          templateFile: 'scripts/template/page.index.js',
+          skipIfExists: true
+        },
+        {
+          type: 'add',
           path: 'src/model/{{moduleName}}/{{pageName}}.js',
           templateFile: 'scripts/template/model.js'
         },

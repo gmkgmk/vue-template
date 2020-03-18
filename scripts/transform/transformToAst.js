@@ -1,11 +1,5 @@
 const fs = require('fs');
-const {
-  pageIndexAst,
-  // modelIndexAst,
-  // routerIndexAst,
-  modelAst,
-  routerAst
-} = require('../ast/index');
+const { pageIndexAst, modelAst, routerAst } = require('../ast/index');
 const compile = require('./compile');
 const codeEncoding = 'utf8';
 /**
@@ -31,6 +25,4 @@ module.exports = {
   transformModel: transform(modelAst),
   transformRouter: transform(routerAst),
   transformPageIndex: transform(pageIndexAst)
-  // transformModelIndex: transform(modelIndexAst)
-  // transformRouteIndex: transform(routerIndexAst)
 };
