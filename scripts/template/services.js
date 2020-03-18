@@ -1,8 +1,5 @@
-// import request from '~/common/js/request.js';
-// import apiConfig from '~/config/api.js';
-// const api = apiConfig.common;
-
+import request from '~/utils/request.js';
+import api from '~/api/index.js';
 export async function queryList() {
-    // return request(`${api.list}`);
-    return {};
+  return request(`${api.list}`);
 }
