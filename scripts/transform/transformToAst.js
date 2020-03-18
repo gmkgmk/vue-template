@@ -1,7 +1,7 @@
 const fs = require('fs');
 const {
   pageIndexAst,
-  modelIndexAst,
+  // modelIndexAst,
   // routerIndexAst,
   modelAst,
   routerAst
@@ -30,7 +30,7 @@ const transform = createVisitor => (...arg) => {
 module.exports = {
   transformModel: transform(modelAst),
   transformRouter: transform(routerAst),
-  transformPageIndex: transform(pageIndexAst),
-  transformModelIndex: transform(modelIndexAst)
+  transformPageIndex: transform(pageIndexAst)
+  // transformModelIndex: transform(modelIndexAst)
   // transformRouteIndex: transform(routerIndexAst)
 };
