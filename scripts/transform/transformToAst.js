@@ -1,10 +1,10 @@
 const fs = require('fs');
 const {
-    pageIndexAst,
-    modelIndexAst,
-    routerIndexAst,
-    modelAst,
-    routerAst
+  pageIndexAst,
+  modelIndexAst,
+  // routerIndexAst,
+  modelAst,
+  routerAst
 } = require('../ast/index');
 const compile = require('./compile');
 const codeEncoding = 'utf8';
@@ -17,20 +17,20 @@ const codeEncoding = 'utf8';
  *
  */
 const transform = createVisitor => (...arg) => {
-    const [filePath, ...rest] = arg;
-    // read
-    const code = fs.readFileSync(filePath, { codeEncoding }).toString();
-    // compile
-    const result = compile(code, createVisitor, filePath, ...rest);
-    // write
-    fs.writeFileSync(filePath, result, codeEncoding);
+  const [filePath, ...rest] = arg;
+  // read
+  const code = fs.readFileSync(filePath, { codeEncoding }).toString();
+  // compile
+  const result = compile(code, createVisitor, filePath, ...rest);
+  // write
+  fs.writeFileSync(filePath, result, codeEncoding);
 };
 
 // 模板地址
 module.exports = {
-    transformModel: transform(modelAst),
-    transformRouter: transform(routerAst),
-    transformPageIndex: transform(pageIndexAst),
-    transformModelIndex: transform(modelIndexAst),
-    transformRouteIndex: transform(routerIndexAst)
+  transformModel: transform(modelAst),
+  transformRouter: transform(routerAst),
+  transformPageIndex: transform(pageIndexAst),
+  transformModelIndex: transform(modelIndexAst)
+  // transformRouteIndex: transform(routerIndexAst)
 };
