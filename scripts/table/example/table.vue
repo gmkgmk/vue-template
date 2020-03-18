@@ -1,10 +1,8 @@
-
-        <script>
+<script>
 import _ from 'lodash';
 import { createNamespacedHelpers } from 'vuex';
 
-
-        export default {
+export default {
   name: 'table-example-component',
 
   data() {
@@ -30,7 +28,4 @@ import { createNamespacedHelpers } from 'vuex';
     );
   }
 };
-
-        </script>
-
-    
+</script>

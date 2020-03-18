@@ -18,7 +18,7 @@ module.exports = {
   chainWebpack: config => {
     config.resolve.alias.set('@pages', resolve('/src/pages'));
     config.resolve.alias.set('@services', resolve('/src/services'));
-    config.resolve.alias.set('@component', resolve('/src/component'));
+    config.resolve.alias.set('@components', resolve('/src/components'));
 
     ['index'].forEach(entryName => {
       config.plugins.delete(`preload-${entryName}`);
@@ -91,7 +91,7 @@ function splitChunks(config) {
       },
       commons: {
         name: 'chunk-commons',
-        test: resolve('src/component'), // can customize your rules
+        test: resolve('src/components'), // can customize your rules
         minChunks: 3, //  minimum common number
         priority: 5,
         reuseExistingChunk: true

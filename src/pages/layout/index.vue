@@ -83,4 +83,8 @@ export default {
 .app-wrapper .submenu-title-noDropdown:hover {
   background-color: #263445 !important;
 }
+.app-wrapper .el-menu-item:focus,
+.el-menu-item:hover {
+  background-color: #263445 !important;
+}
 </style>

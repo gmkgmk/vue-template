@@ -5,7 +5,7 @@ import store from './store';
 // 路由
 import router from './router';
 // 全局组件
-import '@component';
+import '@components';
 import ElementUi from 'element-ui';
 Vue.use(ElementUi, { size: 'medium' });
 
