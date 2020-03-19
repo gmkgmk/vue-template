@@ -16,14 +16,10 @@ export default {
   methods: {
     changeHandle(value) {
       const { model } = this.schema;
-      if (!model) {
-
-      }
       this.value = value;
     }
   },
   render(createElement) {
-
     /*eslint no-unused-vars: 0*/
     const { defaultValue, model, options, optionName, ...restSchema } = this.schema;
     // 自定义Key,value名称
